@@ -63,7 +63,6 @@ iface br0 inet dhcp
     bridge_fd 0
     bridge_ports enp0s3
 EOF
-# bridge_ports 需要连接到 host only 的网卡上，否则 kvm 实例将无法连接到互联网
 
 sudo reboot
 
