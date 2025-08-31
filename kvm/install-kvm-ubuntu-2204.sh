@@ -102,7 +102,7 @@ package_update: true
 packages:
   - inetutils-ping
   - net-tools
-  - bridge-utis
+  - bridge-utils
   - vlan
   - uml-utilities
   - inetutils-traceroute
