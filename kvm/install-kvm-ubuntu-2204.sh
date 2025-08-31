@@ -12,6 +12,7 @@ virsh list --all
 # https://www.surlyjake.com/blog/2020/10/09/ubuntu-cloud-images-in-libvirt-and-virt-manager/
 # https://blog.csdn.net/fengidea/article/details/144212876
 # https://docs.cloud-init.io/en/latest/reference/yaml_examples/apt.html
+# https://docs.cloud-init.io/en/latest/reference/examples.html
 
 cat <<'EOF' > meta-data
 #cloud-config
@@ -73,12 +74,13 @@ EOF
 
 cat <<'EOF' > user-data
 #cloud-config
-hostname: my-vm1
-network:
-  version: 2
-  ethernets:
-    eth0:
-      dhcp4: true
+hostname: my-vm2
+ntp:
+  enabled: true
+  ntp_client: chrony
+manage_resolv_conf: true
+resolv_conf:
+  nameservers: [8.8.8.8, 8.8.4.4]
 users:
   - name: ubuntu
     passwd: $6$rounds=4096$C6aNdJAOP4X/gA3i$PNTPBzcWIeKht9epMa2OzdO4pHgVhaxoplgsgs3lOjwb9ff.HGTZlvQceCqGqy43VdxIfirPhPjJwe5Bc6K2d0
@@ -110,7 +112,7 @@ EOF
 
 cp ubuntu-22.04-minimal-cloudimg-amd64.img /var/lib/libvirt/images/ubuntu2204.img
 virt-install \
-  --name vm1 \
+  --name vm2 \
   --memory 1024 \
   --vcpus 1 \
   --os-variant ubuntu22.04 \
