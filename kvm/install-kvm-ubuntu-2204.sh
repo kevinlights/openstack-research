@@ -11,6 +11,7 @@ virsh list --all
 
 # https://www.surlyjake.com/blog/2020/10/09/ubuntu-cloud-images-in-libvirt-and-virt-manager/
 # https://blog.csdn.net/fengidea/article/details/144212876
+# https://docs.cloud-init.io/en/latest/reference/yaml_examples/apt.html
 
 cat <<'EOF' > meta-data
 #cloud-config
@@ -90,6 +91,19 @@ chpasswd:
   list: |
     root:root
   expire: False
+apt:
+  primary:
+    - arches: [default]
+      search:
+        - http://mirrors.aliyun.com/ubuntu/
+package_update: true
+packages:
+  - inetutils-ping
+  - net-tools
+  - bridge-utis
+  - vlan
+  - uml-utilities
+  - inetutils-traceroute
 # after system comes up first time. 
 final_message: "The system is finally up, after $UPTIME seconds"
 EOF
