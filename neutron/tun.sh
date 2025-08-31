@@ -63,4 +63,5 @@ ip netns exec ns1 ifconfig
 ip netns exec ns1 route -nee
 ip netns exec ns1 traceroute 192.168.60.10
 
-
+ip netns delete ns1
+ip netns delete ns2
